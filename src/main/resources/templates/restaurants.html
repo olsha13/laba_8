@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Заведения</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page lanidng-page mt-5">
+    <section class="portfolio-block skills">
+        <div class="container">
+            <div class="heading">
+                <h2>Заведения</h2>
+            </div>
+            <div class="row">
+                <div th:each="m : ${restaurants}" class="col-md-4">
+                    <div class="card special-skill-item border-0">
+                        <div class="card-header bg-transparent border-0">
+                            <img th:src="'/img/' + ${m.photo}" width="100%" style="border-radius: 50px;">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title" th:text="${m.fio}"></h3>
+                            <p class="card-text" style="color: var(--bs-black);">Категория:&nbsp;&nbsp;
+                                <span th:text="${m.category}"></span></p>
+                            <p class="card-text" style="color: var(--bs-black);">Телефон:&nbsp;
+                                <span th:text="${m.tel}"></span>
+                            <p class="card-text" style="color: var(--bs-black);">Адрес:&nbsp;
+                                <span th:text="${m.address}"></span>&nbsp;
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

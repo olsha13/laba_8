@@ -1,0 +1,31 @@
+<nav th:fragment="nav" class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient"
+     style="background: linear-gradient(90deg, #eab75c, #eab75c);">
+    <div class="container"><a class="navbar-brand logo" href="/">FoodDelivery</a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarNav">
+            <span class="visually-hidden">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Меню</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">О нас</a></li>
+                <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link" href="/category">Категории</a></li>
+                <li th:if="${role == 'MANAGER'}" class="nav-item"><a class="nav-link" href="/restaurant">Данные заведения</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item"><a class="nav-link" href="/restaurants">Заведения</a></li>
+                <li th:if="${role == 'MANAGER' or role == 'CLIENT'}" class="nav-item"><a class="nav-link" href="/foods/my">Заказы заведения</a></li>
+                <li th:if="${role == 'MANAGER'}" class="nav-item"><a class="nav-link" href="/foods/add">Добавить еду</a></li>
+                <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link" href="/stats">Данные деятельности</a></li>
+                <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link" href="/users">Пользователи</a></li>
+                <li th:if="${role == 'NOT'}" class="nav-item"><a class="nav-link" href="/login">Вход</a></li>
+                <li th:if="${role == 'NOT'}" class="nav-item"><a class="nav-link" href="/reg">Регистрация</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item">
+                    <form action="/logout" method="post">
+                        <button class="btn" type="submit" style="color: var(--bs-navbar-color);font-weight: bold;">
+                            Выход
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

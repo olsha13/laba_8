@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Заказы заведения</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page projects-page mt-5">
+    <section class="portfolio-block projects-with-sidebar">
+        <div class="container">
+            <div class="heading">
+                <h2>Заказы заведения</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 project-sidebar-card" th:each="o : ${orderings}" style="background: white; padding: 5px;">
+                    <a th:href="'/foods/' + ${o.food.id}">
+                        <img class="img-fluid image scale-on-hover" th:src="'/img/' + ${o.food.photo}"
+                             style="border-radius: 10px;">
+                    </a>
+                    <p class="lead" style="margin-bottom: 5px;">Название еды:&nbsp;<span th:text="${o.food.name}"></span>
+                    </p>
+                    <p class="lead" style="margin-bottom: 5px;">Цена:&nbsp;&nbsp;<span th:text="${o.food.price}"></span>
+                    </p>
+                    <p class="lead" style="margin-bottom: 5px;">Заказчик:&nbsp;&nbsp;<span
+                            th:text="${o.client.username}"></span></p>
+                    <p class="lead" style="margin-bottom: 5px;">Заведение:&nbsp;&nbsp;<span
+                            th:text="${o.getRestaurant.fio}"></span></p>
+                    <p class="lead" style="margin-bottom: 5px;">Дата:&nbsp;&nbsp;<span th:text="${o.date}"></span></p>
+                    <p class="lead" style="margin-bottom: 5px;">Время:&nbsp;&nbsp;<span th:text="${o.time}"></span></p>
+                    <p class="lead" style="margin-bottom: 5px;">Статус:&nbsp;&nbsp;<span
+                            th:text="${o.statusOrdering.name}"></span></p>
+                    <div th:if="${role == 'MANAGER'}">
+                        <a th:if="${o.statusOrdering.name() == 'WAITING'}" th:href="'/foods/notconf/' + ${o.id}"
+                           class="btn btn-danger" type="button" style="margin-right: 10px;">Не подтверждено</a>
+                        <a th:if="${o.statusOrdering.name() == 'WAITING'}" th:href="'/foods/conf/' + ${o.id}"
+                           class="btn btn-warning" type="button">Подтверждено</a>
+                        <a th:if="${o.statusOrdering.name() == 'CONF'}" th:href="'/foods/done/' + ${o.id}"
+                           class="btn btn-warning" type="button">Выполнено</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

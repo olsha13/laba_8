@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Данные деятельности</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page projects-page mt-5">
+    <section class="portfolio-block projects-with-sidebar">
+        <div class="container">
+            <div class="heading" style="background: rgb(255, 255, 255, 0.9); padding: 10px">
+                <h2 style="margin-bottom: 30px;">Данные деятельности</h2>
+                <div class="row d-xl-flex align-items-xl-center" style="margin-bottom: 10px;">
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h3>Название</h3>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h3>Цена</h3>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h3>Цена</h3>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h3>Прибыль</h3>
+                    </div>
+                </div>
+                <div th:each="n : ${foods}" class="row d-xl-flex align-items-xl-center" style="margin-bottom: 10px;">
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <p class="lead" style="font-weight: bold;color: var(--bs-black);" th:text="${n.name}"></p>
+                    </div>
+                    <div class="col">
+                        <p class="lead d-xl-flex justify-content-xl-end"
+                           style="font-weight: bold;color: var(--bs-black);" th:text="${n.price}"></p>
+                    </div>
+                    <div class="col">
+                        <p class="lead d-xl-flex justify-content-xl-end"
+                           style="font-weight: bold;color: var(--bs-black);" th:text="${n.count}"></p>
+                    </div>
+                    <div class="col">
+                        <p class="lead d-xl-flex justify-content-xl-end"
+                           style="font-weight: bold;color: var(--bs-black);" th:text="${n.price * n.count}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

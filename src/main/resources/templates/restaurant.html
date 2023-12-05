@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Данные заведения</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page project-page mt-5">
+    <section class="portfolio-block project">
+        <div class="container">
+            <div class="heading">
+                <h2>Данные заведения</h2>
+            </div>
+            <div th:if="${message}" class="alert alert-warning" role="alert">
+                <strong th:text="${message}"></strong>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <form style="margin-bottom: 20px;" action="/restaurant/edit/photo" method="post"
+                          enctype="multipart/form-data">
+                        <img th:src="'/img/' + ${user.restaurant.photo}" width="100%"
+                             loading="lazy"
+                             style="border-radius: 50px;margin-bottom: 20px;">
+                        <input class="form-control" type="file" accept="image/*" style="margin-bottom: 20px;"
+                               name="photo">
+                        <button class="btn btn-warning" type="submit">Обновить</button>
+                    </form>
+                </div>
+                <div class="col">
+                    <form style="margin-bottom: 20px;" action="/restaurant/edit" method="post">
+                        <p>Название заведения</p>
+                        <input class="form-control" type="text" required="" style="margin-bottom: 10px;"
+                               name="fio" th:value="${user.restaurant.fio}">
+                        <p>Категория</p>
+                        <select class="form-select" style="margin-bottom: 10px;" required="" name="category">
+                            <option th:each="c : ${categories}" th:value="${c.id}" th:label="${c.name}"
+                                    th:selected="${c.name == user.restaurant.category}"></option>
+                        </select>
+                        <p>Телефон</p>
+                        <input class="form-control" type="tel" required="" style="margin-bottom: 10px;" name="tel"
+                               th:value="${user.restaurant.tel}">
+                        <p>Адрес</p>
+                        <input class="form-control" type="text" required="" style="margin-bottom: 10px;" name="address"
+                               th:value="${user.restaurant.address}">
+                        <button class="btn btn-warning" type="submit">Обновить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

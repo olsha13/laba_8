@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Добавить еду</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page projects-page mt-5">
+    <section class="portfolio-block projects-with-sidebar">
+        <div class="container">
+            <div class="heading">
+                <h2>Добавить еду</h2>
+            </div>
+            <div th:if="${message}" class="alert alert-warning" role="alert">
+                <strong th:text="${message}"></strong>
+            </div>
+            <form style="max-width: 100%;padding: 10px;margin-bottom: 5px;" action="/foods/add" method="post"
+                  enctype="multipart/form-data">
+                <div class="row d-xl-flex align-items-xl-center" style="margin-bottom: 10px;">
+                    <div class="col-3 d-xl-flex justify-content-xl-center">
+                        <h3>Название еды</h3>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <input class="form-control" type="text" required name="name"></div>
+                </div>
+                <div class="row d-xl-flex align-items-xl-center" style="margin-bottom: 10px;">
+                    <div class="col-3 d-xl-flex justify-content-xl-center">
+                        <h3>Категория</h3>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <select class="form-select" name="categoryId" required>
+                            <option th:each="c : ${categories}" th:value="${c.id}" th:label="${c.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row d-xl-flex align-items-xl-center" style="margin-bottom: 10px;">
+                    <div class="col-3 d-xl-flex justify-content-xl-center">
+                        <h3>Фото</h3>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <input class="form-control" type="file" accept="image/*" required name="photo">
+                    </div>
+                </div>
+                <div class="row d-xl-flex align-items-xl-center" style="margin-bottom: 10px;">
+                    <div class="col-3 d-xl-flex justify-content-xl-center">
+                        <h3>Цена</h3>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <input class="form-control" type="number" value="1" min="1" max="500" step="1" name="price"
+                               required>
+                    </div>
+                </div>
+                <div class="row d-xl-flex align-items-xl-center" style="margin-bottom: 10px;">
+                    <div class="col-3 d-xl-flex justify-content-xl-center">
+                        <h3>Описание</h3>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <input class="form-control" type="text" name="description" required>
+                    </div>
+                </div>
+                <div class="row d-xl-flex align-items-xl-center" style="margin-bottom: 10px;">
+                    <div class="col-xl-12 d-xl-flex align-items-xl-center">
+                        <button class="btn btn-warning" type="submit" style="margin-right: 10px;margin-left: 20px;">
+                            Добавить
+                        </button>
+                        <button class="btn btn-secondary" type="reset">Очистить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

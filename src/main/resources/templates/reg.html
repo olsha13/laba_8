@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Регистрация</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page contact-page mt-5">
+    <section class="portfolio-block contact">
+        <div class="container">
+            <div class="heading">
+                <h2>Регистрация</h2>
+            </div>
+            <div th:if="${message}" class="alert alert-warning" role="alert">
+                <strong th:text="${message}"></strong>
+            </div>
+            <form action="/reg" method="post">
+                <div class="mb-3"><label class="form-label" for="name">Логин</label><input class="form-control item"
+                                                                                           type="text" id="name"
+                                                                                           name="username" required="">
+                </div>
+                <div class="mb-3"><label class="form-label" for="subject">Пароль</label><input class="form-control"
+                                                                                               type="password"
+                                                                                               name="password"
+                                                                                               required=""></div>
+                <div class="mb-3">
+                    <button class="btn btn-warning btn-lg d-block w-100" type="submit">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

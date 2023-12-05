@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Категории</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page projects-page mt-5">
+    <section class="portfolio-block projects-with-sidebar">
+        <div class="container">
+            <div class="heading">
+                <h2>Категории</h2>
+            </div>
+            <form style="max-width: 100%;max-height: 100px;padding: 5px;margin-bottom: 5px;">
+                <div class="row d-xl-flex align-items-xl-center">
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h2>Название</h2>
+                    </div>
+                    <div class="col-xl-2"></div>
+                    <div class="col-xl-2"></div>
+                </div>
+            </form>
+            <form style="max-width: 100%;max-height: 100px;padding: 5px;margin-bottom: 5px;" action="/category/add/"
+                  method="post">
+                <div class="row d-xl-flex align-items-xl-center">
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <input class="form-control" type="text" required="" name="name"></div>
+                    <div class="col-xl-2 d-xl-flex justify-content-xl-center">
+                        <button class="btn btn-warning" type="submit">Добавить</button>
+                    </div>
+                    <div class="col-xl-2 d-xl-flex justify-content-xl-center"></div>
+                </div>
+            </form>
+            <form th:each="c : ${categories}" style="max-width: 100%;max-height: 100px;padding: 5px;margin-bottom: 5px;"
+                  th:action="'/category/edit/' + ${c.id}" method="post">
+                <div class="row d-xl-flex align-items-xl-center">
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <input class="form-control" type="text" name="name" required th:value="${c.name}"></div>
+                    <div class="col-xl-2 d-xl-flex justify-content-xl-center">
+                        <button class="btn btn-warning" type="submit">Обновить</button>
+                    </div>
+                    <div class="col-xl-2 d-xl-flex justify-content-xl-center">
+                        <a class="btn btn-danger" role="button" th:href="'/category/delete/' + ${c.id}"
+                           style="color: var(--bs-btn-disabled-color);">Удалить</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

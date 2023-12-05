@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${food.name}"></title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page project-page mt-5">
+    <section class="portfolio-block project">
+        <div class="container">
+            <div class="heading">
+                <h2 th:text="${food.name}"></h2>
+            </div>
+            <div class="d-xl-flex justify-content-xl-center" style="margin-bottom: 30px;">
+                <img class="d-xl-flex justify-content-xl-center align-items-xl-center" th:src="'/img/' + ${food.photo}"
+                     height="400px" style="border-radius: 50px;"/>
+            </div>
+            <div class="d-xl-flex justify-content-xl-center" style="margin-bottom: 30px;" th:if="${role == 'MANAGER'}">
+                <a class="btn btn-warning" th:href="'/foods/edit/' + ${food.id}" style="margin-right: 10px">Редактировать</a>
+                <a class="btn btn-danger" th:href="'/foods/delete/' + ${food.id}">Удалить</a>
+            </div>
+            <form style="margin-bottom: 20px;" th:action="'/foods/ordering/' + ${food.id}" method="post">
+                <p class="lead">Выберите заведение</p>
+                <select class="form-select" style="margin-bottom: 10px;" required name="restaurantId">
+                    <option th:each="m : ${restaurants}" th:value="${m.id}" th:label="${m.fio}"></option>
+                </select>
+                <input class="form-control" type="date" style="margin-bottom: 10px;" name="date" required>
+                <input class="form-control" type="time" style="margin-bottom: 10px;" name="time" required="">
+                <button class="btn btn-warning" type="submit">Заказать</button>
+            </form>
+            <div class="row">
+                <div class="col-12 col-md-6 offset-md-1 info">
+                    <h3>Описание</h3>
+                    <p th:text="${food.description}"></p>
+                </div>
+                <div class="col-12 col-md-3 offset-md-1 meta">
+                    <div class="tags">
+                        <span class="meta-heading">Категория:&nbsp;
+                            <span class="meta-heading" th:text="${food.category.name}"></span>
+                        </span>
+                        <span class="meta-heading">Цена:&nbsp;
+                            <span class="meta-heading" th:text="${food.price}"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+</html>
